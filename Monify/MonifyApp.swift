@@ -9,9 +9,13 @@ import SwiftUI
 
 @main
 struct MonifyApp: App {
+    @StateObject var transactionListVM = TransactionList()
+    
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .environmentObject(transactionListVM)
         }
     }
 }
+ 
