@@ -6,6 +6,10 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		24ECE77D2CC3D6E800C609F9 /* SwiftUIFontIcon in Frameworks */ = {isa = PBXBuildFile; productRef = 24ECE77C2CC3D6E800C609F9 /* SwiftUIFontIcon */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
 		24ECE7402CC3BCAF00C609F9 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -52,6 +56,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				24ECE77D2CC3D6E800C609F9 /* SwiftUIFontIcon in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -112,6 +117,7 @@
 			);
 			name = Monify;
 			packageProductDependencies = (
+				24ECE77C2CC3D6E800C609F9 /* SwiftUIFontIcon */,
 			);
 			productName = Monify;
 			productReference = 24ECE72F2CC3BCAE00C609F9 /* Monify.app */;
@@ -195,6 +201,9 @@
 			);
 			mainGroup = 24ECE7262CC3BCAE00C609F9;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				24ECE7782CC3D00200C609F9 /* XCRemoteSwiftPackageReference "SwiftUIFontIcon" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 24ECE7302CC3BCAE00C609F9 /* Products */;
 			projectDirPath = "";
@@ -558,6 +567,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		24ECE7782CC3D00200C609F9 /* XCRemoteSwiftPackageReference "SwiftUIFontIcon" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/huybuidac/SwiftUIFontIcon";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		24ECE77C2CC3D6E800C609F9 /* SwiftUIFontIcon */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 24ECE7782CC3D00200C609F9 /* XCRemoteSwiftPackageReference "SwiftUIFontIcon" */;
+			productName = SwiftUIFontIcon;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 24ECE7272CC3BCAE00C609F9 /* Project object */;
 }
