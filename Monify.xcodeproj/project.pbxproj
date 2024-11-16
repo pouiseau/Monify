@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		242AAEA02CE8E0200018F790 /* Collections in Frameworks */ = {isa = PBXBuildFile; productRef = 242AAE9F2CE8E0200018F790 /* Collections */; };
+		242AAEA32CE8E1660018F790 /* SwiftUICharts in Frameworks */ = {isa = PBXBuildFile; productRef = 242AAEA22CE8E1660018F790 /* SwiftUICharts */; };
 		24ECE77D2CC3D6E800C609F9 /* SwiftUIFontIcon in Frameworks */ = {isa = PBXBuildFile; productRef = 24ECE77C2CC3D6E800C609F9 /* SwiftUIFontIcon */; };
 /* End PBXBuildFile section */
 
@@ -56,6 +58,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				242AAEA32CE8E1660018F790 /* SwiftUICharts in Frameworks */,
+				242AAEA02CE8E0200018F790 /* Collections in Frameworks */,
 				24ECE77D2CC3D6E800C609F9 /* SwiftUIFontIcon in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -118,6 +122,8 @@
 			name = Monify;
 			packageProductDependencies = (
 				24ECE77C2CC3D6E800C609F9 /* SwiftUIFontIcon */,
+				242AAE9F2CE8E0200018F790 /* Collections */,
+				242AAEA22CE8E1660018F790 /* SwiftUICharts */,
 			);
 			productName = Monify;
 			productReference = 24ECE72F2CC3BCAE00C609F9 /* Monify.app */;
@@ -203,6 +209,8 @@
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
 				24ECE7782CC3D00200C609F9 /* XCRemoteSwiftPackageReference "SwiftUIFontIcon" */,
+				242AAE9E2CE8DFE60018F790 /* XCRemoteSwiftPackageReference "swift-collections" */,
+				242AAEA12CE8E1660018F790 /* XCRemoteSwiftPackageReference "ChartView" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 24ECE7302CC3BCAE00C609F9 /* Products */;
@@ -569,6 +577,22 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		242AAE9E2CE8DFE60018F790 /* XCRemoteSwiftPackageReference "swift-collections" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/apple/swift-collections.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.1.4;
+			};
+		};
+		242AAEA12CE8E1660018F790 /* XCRemoteSwiftPackageReference "ChartView" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/AppPear/ChartView";
+			requirement = {
+				kind = exactVersion;
+				version = "2.0.0-beta.2";
+			};
+		};
 		24ECE7782CC3D00200C609F9 /* XCRemoteSwiftPackageReference "SwiftUIFontIcon" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/huybuidac/SwiftUIFontIcon";
@@ -580,6 +604,16 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		242AAE9F2CE8E0200018F790 /* Collections */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 242AAE9E2CE8DFE60018F790 /* XCRemoteSwiftPackageReference "swift-collections" */;
+			productName = Collections;
+		};
+		242AAEA22CE8E1660018F790 /* SwiftUICharts */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 242AAEA12CE8E1660018F790 /* XCRemoteSwiftPackageReference "ChartView" */;
+			productName = SwiftUICharts;
+		};
 		24ECE77C2CC3D6E800C609F9 /* SwiftUIFontIcon */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 24ECE7782CC3D00200C609F9 /* XCRemoteSwiftPackageReference "SwiftUIFontIcon" */;

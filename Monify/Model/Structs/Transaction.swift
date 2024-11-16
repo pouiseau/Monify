@@ -40,4 +40,8 @@ struct Transaction: Identifiable, Decodable, Hashable {
         ? amount
         : -amount
     }
+    
+    var month: String {
+        dateParsed.formatted(.dateTime.year().month(.wide))
+    }
 }
