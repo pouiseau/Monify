@@ -7,8 +7,8 @@
 
 import SwiftUI
 
-struct RecentTransactionList: View {
-    @EnvironmentObject var transactionList: TransactionList
+struct RecentTransactionListView: View {
+    @EnvironmentObject var transactionList: TransactionListViewModel
     var body: some View {
         VStack {
             HStack {
@@ -20,7 +20,7 @@ struct RecentTransactionList: View {
                 
                 // MARK: Navigation link
                 NavigationLink{
-                    TransactionGroupView()
+                    TransactionListView()
                 } label: {
                     HStack(spacing: 4) {
                         Text("See All ")
@@ -35,7 +35,7 @@ struct RecentTransactionList: View {
             
             // MARK: Recent transactions list
             ForEach(transactions, id: \.element) { index, transaction in
-                TransactionRow(transaction: transaction)
+                TransactionRowView(transaction: transaction)
                 
                 Divider().opacity(index == transactions.count - 1 ? 0 : 1)
             }
@@ -48,12 +48,12 @@ struct RecentTransactionList: View {
 }
 
 #Preview {
-    let transactionList: TransactionList = {
-        let transactionList = TransactionList()
+    let transactionList: TransactionListViewModel = {
+        let transactionList = TransactionListViewModel()
         transactionList.transactions = transactionListPreviewData
         return transactionList
     }()
     
-    RecentTransactionList()
+    RecentTransactionListView()
         .environmentObject(transactionList)
 }

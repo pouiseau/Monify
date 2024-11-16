@@ -8,7 +8,7 @@
 import SwiftUI
 import SwiftUIFontIcon
 
-struct TransactionRow: View {
+struct TransactionRowView: View {
     var transaction: Transaction
     
     var body: some View {
@@ -23,15 +23,15 @@ struct TransactionRow: View {
             VStack(alignment: .leading, spacing: 6) {
                 
                 // MARK: Transaction merchant
-                Text(transaction.merchant)
-                    .font(.subheadline)
-                    .bold()
-                    .lineLimit(1)
+//                Text(transaction.name)
+//                    .font(.subheadline)
+//                    .bold()
+//                    .lineLimit(1)
                 
                 // MARK: Transaction category
                 Text(transaction.category)
-                    .font(.footnote)
-                    .opacity(0.7)
+                    .font(.subheadline)
+                    .bold()
                     .lineLimit(1)
                 
                 // MARK: Transaction date
@@ -46,7 +46,7 @@ struct TransactionRow: View {
             // MARK Transaction amount
             Text(transaction.signedAmount, format: .currency(code: "USD"))
                 .bold()
-                .foregroundStyle(transaction.type == TransactionType.credit.rawValue
+                .foregroundStyle(!transaction.isExpense
                                  ? Color.customText
                                  : .primary)
         }
@@ -55,5 +55,5 @@ struct TransactionRow: View {
 }
 
 #Preview {
-    TransactionRow(transaction: transactionPreviewData)
+    TransactionRowView(transaction: transactionPreviewData)
 }

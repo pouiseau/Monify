@@ -12,7 +12,7 @@ import Collections
 typealias TransactionGroup = OrderedDictionary<String, [Transaction]>
 typealias TransactionPrefixSum = [(String, Double)]
 
-final class TransactionList: ObservableObject {
+final class TransactionListViewModel: ObservableObject {
     @Published var transactions: [Transaction] = []
     
     private var cancellables = Set<AnyCancellable>()

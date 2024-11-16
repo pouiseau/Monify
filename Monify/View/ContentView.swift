@@ -9,7 +9,7 @@ import SwiftUI
 import SwiftUICharts
 
 struct ContentView: View {
-    @EnvironmentObject var transactionList: TransactionList
+    @EnvironmentObject var transactionList: TransactionListViewModel
     var body: some View {
         NavigationView {
             ScrollView {
@@ -24,7 +24,7 @@ struct ContentView: View {
                     
                     if !data.isEmpty {
                         let totalExpenses = data.last?.1 ?? 0
-                        CardView {
+                        CardView (showShadow: false) {
                             VStack (alignment: .leading) {
                                 ChartLabel(totalExpenses.formatted(.currency(code: "USD")), type: .title, format: "$%.02f")
                                 LineChart()
@@ -34,10 +34,12 @@ struct ContentView: View {
                             .data(data)
                             .chartStyle(ChartStyle(backgroundColor: Color.systemBackground, foregroundColor: ColorGradient(Color.icon.opacity(0.4), Color.icon)))
                             .frame(height: 300)
+                            .clipShape(RoundedRectangle(cornerRadius: 20, style: .continuous))
+                            .shadow(color: Color.primary.opacity(0.2), radius: 10, x: 0, y: 5)
                     }
                     
                     // MARK: Recent transactions
-                    RecentTransactionList()
+                    RecentTransactionListView()
                         .environmentObject(transactionList)
                 }
                 .padding()
@@ -46,13 +48,14 @@ struct ContentView: View {
             .background(Color.customBackground)
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
-                // MARK: Notification Icon
-                ToolbarItem {
-                    Image(systemName: "bell.badge")
-                        .symbolRenderingMode(.palette)
-                        .foregroundStyle(Color.customIcon, .primary)
+                // MARK: Add Button
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    NavigationLink(destination: NewTransaction()) {
+                        Image(systemName: "plus")
+                            .symbolRenderingMode(.palette)
+                            .foregroundStyle( .primary)
+                    }
                 }
-                
             }
         }
         .navigationViewStyle(.stack)
@@ -61,8 +64,8 @@ struct ContentView: View {
 }
 
 #Preview {
-    let transactionList: TransactionList = {
-        let transactionList = TransactionList()
+    let transactionList: TransactionListViewModel = {
+        let transactionList = TransactionListViewModel()
         transactionList.transactions = transactionListPreviewData
         return transactionList
     }()

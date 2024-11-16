@@ -7,8 +7,8 @@
 
 import SwiftUI
 
-struct TransactionGroupView: View {
-    @EnvironmentObject var transactionList: TransactionList
+struct TransactionListView: View {
+    @EnvironmentObject var transactionList: TransactionListViewModel
     
     var body: some View {
         VStack {
@@ -16,7 +16,7 @@ struct TransactionGroupView: View {
                 ForEach(Array(transactionList.groupByMonth()), id: \.key) { month, transactions in
                     Section {
                         ForEach(transactions) { transaction in
-                            TransactionRow(transaction: transaction)
+                            TransactionRowView(transaction: transaction)
                         }
                     }
                     header: {
@@ -35,12 +35,12 @@ struct TransactionGroupView: View {
 }
 
 #Preview {
-    let transactionList: TransactionList = {
-        let transactionList = TransactionList()
+    let transactionList: TransactionListViewModel = {
+        let transactionList = TransactionListViewModel()
         transactionList.transactions = transactionListPreviewData
         return transactionList
     }()
     NavigationView {
-        TransactionGroupView().environmentObject(transactionList)
+        TransactionListView().environmentObject(transactionList)
     }
 }
