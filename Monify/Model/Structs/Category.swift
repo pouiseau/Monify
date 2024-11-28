@@ -16,6 +16,7 @@ struct Category {
 }
 
 extension Category {
+    static let uncategorized = Category (id: 0, name: "Uncategorized", icon: .question)
     static let autoAndTransport = Category (id: 1, name: "Auto & Transport", icon: .car_alt)
     static let billsAndUtilities = Category(id: 2, name: "Bills & Utilities", icon: .file_invoice_dollar)
     static let entertainment = Category (id: 3, name: "Entertainment", icon: .film)
@@ -43,6 +44,7 @@ extension Category {
 
 extension Category {
     static let categories: [Category] = [
+        .uncategorized,
         .autoAndTransport,
         .billsAndUtilities,
         .entertainment,
@@ -54,21 +56,23 @@ extension Category {
         .transfer
     ]
     
-//    static let subCategories: [Category] = [
-//        .publicTransportation,
-//        .taxi,
-//        .mobilePhone,
-//        .moviesAndDVDs,
-//        .bankFee,
-//        .financeCharge,
-//        .groceries,
-//        .restaurants,
-//        .rent,
-//        .homeSupplies,
-//        .paycheque,
-//        .software,
-//        .creditCardPayment
-//    ]
+    static let expenses: [Category] = [
+        .uncategorized,
+        .autoAndTransport,
+        .billsAndUtilities,
+        .entertainment,
+        .feesAndCharges,
+        .foodAndDining,
+        .home,
+        .shopping,
+        .transfer
+    ]
+    
+    static let incomes: [Category] = [
+        .uncategorized,
+        .income,
+        .transfer
+    ]
     
     static let all: [Category] = categories
 //    + subCategories

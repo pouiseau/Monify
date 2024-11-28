@@ -8,20 +8,14 @@
 import Foundation
 import SwiftUIFontIcon
 
-struct Transaction: Identifiable, Decodable, Hashable {
+struct Transaction: Identifiable, Decodable, Encodable, Hashable {
     let id: Int
     let date: String
-//    let institution: String
-//    let account: String
-//    var merchant: String
     let amount: Double
-//    let type: TransactionType.RawValue
+    var currency: Currency
     var categoryId: Int
     var category: String
-//    let isPending: Bool
-    var isTransfer: Bool
     var isExpense: Bool
-//    var isEdited: Bool
     
     var icon: FontAwesomeCode {
         if let category = Category.all.first(where: {$0.id == categoryId }) {
@@ -37,6 +31,10 @@ struct Transaction: Identifiable, Decodable, Hashable {
     
     var signedAmount: Double {
         !isExpense ? amount : -amount
+    }
+    
+    func amountInUSD(exchangeRate: Double) -> Double {
+        return signedAmount / exchangeRate
     }
     
     var month: String {

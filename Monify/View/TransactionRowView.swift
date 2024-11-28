@@ -44,7 +44,7 @@ struct TransactionRowView: View {
             Spacer()
             
             // MARK Transaction amount
-            Text(transaction.signedAmount, format: .currency(code: "USD"))
+            Text(transaction.signedAmount, format: .currency(code: transaction.currency.rawValue))
                 .bold()
                 .foregroundStyle(!transaction.isExpense
                                  ? Color.customText

@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct RecentTransactionListView: View {
-    @EnvironmentObject var transactionList: TransactionListViewModel
+    @StateObject var viewModel: TransactionListViewModel
     var body: some View {
         VStack {
             HStack {
@@ -31,7 +31,15 @@ struct RecentTransactionListView: View {
             }
             .padding(.top)
             
-            let transactions = Array(transactionList.transactions.prefix(5).enumerated())
+            let transactions = Array(viewModel.transactions.suffix(5).enumerated().reversed())
+            
+            // MARK: No recent transactions
+            if transactions.isEmpty {
+                Text("No Recent Transactions")
+                    .font(.subheadline)
+                    .foregroundColor(.secondary)
+                    .padding([.top, .bottom], 8)
+            }
             
             // MARK: Recent transactions list
             ForEach(transactions, id: \.element) { index, transaction in
@@ -48,12 +56,6 @@ struct RecentTransactionListView: View {
 }
 
 #Preview {
-    let transactionList: TransactionListViewModel = {
-        let transactionList = TransactionListViewModel()
-        transactionList.transactions = transactionListPreviewData
-        return transactionList
-    }()
-    
-    RecentTransactionListView()
-        .environmentObject(transactionList)
+    let transactionList: TransactionListViewModel = TransactionListViewModel()
+    RecentTransactionListView(viewModel: transactionList)
 }

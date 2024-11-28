@@ -8,25 +8,34 @@
 import SwiftUI
 
 struct TransactionListView: View {
-    @EnvironmentObject var transactionList: TransactionListViewModel
+    @EnvironmentObject var viewModel: TransactionListViewModel
     
     var body: some View {
         VStack {
-            List {
-                ForEach(Array(transactionList.groupByMonth()), id: \.key) { month, transactions in
-                    Section {
-                        ForEach(transactions) { transaction in
-                            TransactionRowView(transaction: transaction)
-                        }
-                    }
-                    header: {
-                        Text(month)
-                    }
-                    .listSectionSeparator(.hidden)
+            if viewModel.transactions.isEmpty {
+                VStack {
+                    Spacer()
+                    Text("No Recent Transactions")
+                        .font(.subheadline)
+                        .foregroundColor(.secondary)
+                    Spacer()
                 }
+            } else {
+                List {
+                    ForEach(Array(viewModel.groupByMonth()), id: \.key) { month, transactions in
+                        Section {
+                            ForEach(transactions) { transaction in
+                                TransactionRowView(transaction: transaction)
+                            }
+                        }
+                        header: {
+                            Text(month)
+                        }
+                        .listSectionSeparator(.hidden)
+                    }
+                }
+                .listStyle(.plain)
             }
-            .listStyle(.plain)
-            
         }
         .navigationTitle("Transactions")
         .navigationBarTitleDisplayMode(.inline)
