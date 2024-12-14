@@ -3,7 +3,7 @@ import SwiftUI
 struct NewTransactionView: View {
     @Environment(\.presentationMode) var presentationMode
     
-    @StateObject var viewModel: TransactionListViewModel
+    @EnvironmentObject var viewModel: TransactionListViewModel
     
     @State private var date = Date()
     @State private var amount = ""
@@ -105,7 +105,7 @@ struct NewTransactionView: View {
 }
 
 #Preview {
-    let transactionList = TransactionListViewModel()
-    NewTransactionView(viewModel: transactionList)
+    let viewModel: TransactionListViewModel = TransactionListViewModel()
+    NewTransactionView().environmentObject(viewModel)
        
 }

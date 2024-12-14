@@ -21,13 +21,6 @@ struct TransactionRowView: View {
                 }
             
             VStack(alignment: .leading, spacing: 6) {
-                
-                // MARK: Transaction merchant
-//                Text(transaction.name)
-//                    .font(.subheadline)
-//                    .bold()
-//                    .lineLimit(1)
-                
                 // MARK: Transaction category
                 Text(transaction.category)
                     .font(.subheadline)
@@ -43,7 +36,7 @@ struct TransactionRowView: View {
             
             Spacer()
             
-            // MARK Transaction amount
+            // MARK: Transaction amount
             Text(transaction.signedAmount, format: .currency(code: transaction.currency.rawValue))
                 .bold()
                 .foregroundStyle(!transaction.isExpense

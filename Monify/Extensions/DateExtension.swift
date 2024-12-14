@@ -9,6 +9,6 @@ import Foundation
 
 extension Date {
     func formatted() -> String {
-        return self.formatted(.dateTime.year().month().day())
+        return self.formatted(.dateTime.weekday(.abbreviated))
     }
 }

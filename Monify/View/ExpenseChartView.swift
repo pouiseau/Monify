@@ -9,53 +9,69 @@ import SwiftUI
 import Charts
 
 struct ExpenseChartView: View {
-    @ObservedObject var viewModel: TransactionListViewModel
+    @EnvironmentObject var viewModel: TransactionListViewModel
    
     var body: some View {
-//        CardView(showShadow: false) {
-//            VStack(alignment: .leading) {
-//                // Total expenses displayed as a title
-//                Text(viewModel.totalExpenses.formatted(.currency(code: "USD")))
-//                    .font(.largeTitle)
-//                    .bold()
-//                    .padding(.bottom, 8)
-//
-//                // Subtitle for the chart
-//                Text("Spent this month")
-//                    .font(.headline)
-//                    .foregroundColor(.secondary)
-//                    .padding(.bottom, 16)
-//
-//                // Chart implementation
-//                if viewModel.prefixSum.isEmpty {
-//                    Text("No data available")
-//                        .foregroundColor(.secondary)
-//                        .font(.headline)
-//                        .frame(maxWidth: .infinity, maxHeight: .infinity)
-//                        .padding()
-//                } else {
-//                    Chart(viewModel.prefixSum) { dataPoint in
-//                        LineMark(
-//                            x: .value("Date", dataPoint.date),
-//                            y: .value("Expense", dataPoint.value)
-//                        )
-//                        .foregroundStyle(Color.icon.opacity(0.6))
-//                        .lineStyle(StrokeStyle(lineWidth: 2))
-//                    }
-//                    .chartYScale(domain: 0...max(viewModel.prefixSum.map(\.value).max() ?? 1.0, 1.0)) // Dynamically scale Y-axis
-//                    .padding()
-//                }
-//            }
-//            .padding()
-//            .background(Color.systemBackground)
-//        }
-//        .frame(height: 300)
-//        .clipShape(RoundedRectangle(cornerRadius: 20, style: .continuous))
-//        .shadow(color: Color.primary.opacity(0.2), radius: 10, x: 0, y: 5)
-        Text("Hello")
+        VStack(spacing: 20) {
+            // MARK: Total Expenses Header
+            HStack {
+                Text("Spent this Week:")
+                    .foregroundStyle(.primary)
+                    .bold()
+                
+                Text(viewModel.totalExpenses, format: .currency(code: "USD"))
+                    .foregroundStyle(Color.customText)
+                    .bold()
+            }.frame(alignment: .leading)
+                
+
+            if viewModel.prefixSum.isEmpty {
+                // Placeholder for empty graph
+                EmptyGraphView()
+                    .padding()
+                    .frame(height: 300)
+            } else {
+                Chart {
+                    ForEach(viewModel.prefixSum) { item in
+                        LineMark(
+                            x: .value("Day", item.date),
+                            y: .value("Value", item.sum)
+                        )
+                    }
+                    .lineStyle(StrokeStyle(lineWidth: 2, lineCap: .round, lineJoin: .round))
+                    .foregroundStyle(Color.customIcon)
+                }
+                .frame(height: 300)
+                .background(Color.customBackground.opacity(0.8))
+                .cornerRadius(12)
+                .shadow(color: Color.black.opacity(0.1), radius: 10, x: 0, y: 4)
+            }
+            
+        }
+        .task {
+            viewModel.updateAccumulatedData()
+        }
+        .padding()
+        .background(Color.systemBackground)
+        .clipShape(RoundedRectangle(cornerRadius: 20, style: .continuous))
+        .shadow(color: Color.primary.opacity(0.2), radius: 10, x: 0, y: 5)
+    }
+}
+
+struct EmptyGraphView: View {
+    var body: some View {
+        VStack {
+            Image(systemName: "chart.xyaxis.line")
+                .font(.largeTitle)
+                .foregroundColor(Color.customIcon)
+            Text("No data available")
+                .font(.footnote)
+        }
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
     }
 }
 
 #Preview {
-    ExpenseChartView(viewModel: TransactionListViewModel())
+    let viewModel: TransactionListViewModel = TransactionListViewModel()
+    ExpenseChartView().environmentObject(viewModel)
 }

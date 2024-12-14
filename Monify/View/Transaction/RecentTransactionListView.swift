@@ -8,7 +8,8 @@
 import SwiftUI
 
 struct RecentTransactionListView: View {
-    @StateObject var viewModel: TransactionListViewModel
+    @EnvironmentObject var viewModel: TransactionListViewModel
+
     var body: some View {
         VStack {
             HStack {
@@ -20,7 +21,7 @@ struct RecentTransactionListView: View {
                 
                 // MARK: Navigation link
                 NavigationLink{
-                    TransactionListView()
+                    TransactionListView().environmentObject(viewModel)
                 } label: {
                     HStack(spacing: 4) {
                         Text("See All ")
@@ -56,6 +57,6 @@ struct RecentTransactionListView: View {
 }
 
 #Preview {
-    let transactionList: TransactionListViewModel = TransactionListViewModel()
-    RecentTransactionListView(viewModel: transactionList)
+    let viewModel: TransactionListViewModel = TransactionListViewModel()
+    RecentTransactionListView().environmentObject(viewModel)
 }

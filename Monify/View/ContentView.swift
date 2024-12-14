@@ -21,10 +21,10 @@ struct ContentView: View {
                         .bold()
                     
                     // MARK: Chart
-                    
+                    ExpenseChartView().environmentObject(viewModel)
                 
                     // MARK: Recent transactions
-                    RecentTransactionListView(viewModel: viewModel)
+                    RecentTransactionListView().environmentObject(viewModel)
                 }
                 .padding()
                 .frame(maxWidth: .infinity)
@@ -32,11 +32,10 @@ struct ContentView: View {
             .background(Color.customBackground)
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
-                
                 // MARK: Add Button
                 ToolbarItem(placement: .navigationBarTrailing) {
                     NavigationLink {
-                        NewTransactionView(viewModel: viewModel)
+                        NewTransactionView().environmentObject(viewModel)
                     } label: {
                         Image(systemName: "plus")
                             .symbolRenderingMode(.palette)
@@ -49,16 +48,8 @@ struct ContentView: View {
         .accentColor(.primary)
     }
     
-    
-    
 }
 
 #Preview {
-    let transactionList: TransactionListViewModel = {
-        let transactionList = TransactionListViewModel()
-        return transactionList
-    }()
-    
     ContentView()
-        .environmentObject(transactionList)
 }
