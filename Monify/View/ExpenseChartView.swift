@@ -25,8 +25,7 @@ struct ExpenseChartView: View {
             }.frame(alignment: .leading)
                 
 
-            if viewModel.prefixSum.isEmpty {
-                // Placeholder for empty graph
+            if viewModel.totalExpenses == 0 {
                 EmptyGraphView()
                     .padding()
                     .frame(height: 300)
@@ -64,7 +63,7 @@ struct EmptyGraphView: View {
             Image(systemName: "chart.xyaxis.line")
                 .font(.largeTitle)
                 .foregroundColor(Color.customIcon)
-            Text("No data available")
+            Text("No expenses yet")
                 .font(.footnote)
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
